@@ -3,8 +3,8 @@ import search from "./search";
 import title from "./title";
 
 const app = new Elysia().get("/", () => "Hello Elysia");
-
-app.use(search).use(title);
+app.use(search);
+app.use(title);
 app.listen(3000);
 
 console.log(
