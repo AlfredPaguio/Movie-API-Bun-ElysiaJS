@@ -15,7 +15,7 @@ search.guard(
     app
 
       .get("/movie", async ({ query, db }) => {
-        return db.movie.findMany({
+        return await db.movie.findMany({
           where: {
             title: {
               contains: query.q,
@@ -24,7 +24,7 @@ search.guard(
         });
       })
       .get("/tv", async ({ query, db }) => {
-        return db.movie.findMany({
+        return await db.movie.findMany({
           where: {
             title: {
               contains: query.q,
@@ -34,7 +34,7 @@ search.guard(
         });
       })
       .get("/person", async ({ query, db }) => {
-        return db.person.findMany({
+        return await db.person.findMany({
           where: {
             name: {
               contains: query.q,
@@ -43,7 +43,7 @@ search.guard(
         });
       })
       .get("/episode", async ({ query, db }) => {
-        return db.episode.findMany({
+        return await db.episode.findMany({
           where: {
             title: {
               contains: query.q,
@@ -52,7 +52,7 @@ search.guard(
         });
       })
       .get("/review", async ({ query, db }) => {
-        return db.review.findMany({
+        return await db.review.findMany({
           where: {
             comment: {
               contains: query.q,
@@ -61,7 +61,7 @@ search.guard(
         });
       })
       .get("/award", async ({ query, db }) => {
-        return db.award.findMany({
+        return await db.award.findMany({
           where: {
             name: {
               contains: query.q,
