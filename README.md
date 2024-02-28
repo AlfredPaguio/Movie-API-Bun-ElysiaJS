@@ -1,15 +1,48 @@
-# Elysia with Bun runtime
+# Elysia with Bun Runtime
+
+## Introduction
+
+This project utilizes Bun as the runtime environment along with ElysiaJS, Prisma, and Postgres. It offers a streamlined development process and integrates well with Swagger for API documentation.
 
 ## Getting Started
-To get started with this template, simply paste this command into your terminal:
+
+### Installation
+
+Begin by installing the necessary dependencies:
+
 ```bash
-bun create elysia ./elysia-example
+bun install
 ```
 
-## Development
+### Database Configuration
+
+Add your database credentials to the .env file:
+
+```dotenv
+POSTGRES_PRISMA_URL="postgres://<username>:<password>@<host>:<port>/<database>?sslmode=require&pgbouncer=true&connect_timeout=15"
+POSTGRES_URL_NON_POOLING="postgres://<username>:<password>@<host>:<port>/<database>?sslmode=require"
+```
+
+### Migration and Seeding
+
+Run migration and seed scripts:
+
+```bash
+bunx prisma migrate dev
+```
+
+### Development Server
+
 To start the development server run:
+
 ```bash
 bun run dev
 ```
+
+## Documentation
+
+Swagger is used for API documentation, accessible at http://localhost:3000/swagger.
+
+## Viewing the Application
 
 Open http://localhost:3000/ with your browser to see the result.
