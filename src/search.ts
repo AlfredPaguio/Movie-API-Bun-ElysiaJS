@@ -1,6 +1,9 @@
 import { Elysia, t } from "elysia";
+import setupDB from "./setupDB";
 
-const search = new Elysia({ prefix: "/search" });
+const search = new Elysia({ prefix: "/search" }).use(setupDB);
+
+search.get("/", async ({ db }) => db.movie.findMany());
 
 search.guard(
   {
@@ -10,13 +13,62 @@ search.guard(
   },
   (app) =>
     app
-      .get("/", ({ query }) => `test: ${query.q}`)
-      .get("/movie", ({ query }) => `test: ${query.q}`)
-      .get("/tv", ({ query }) => `test: ${query.q}`)
-      .get("/person", ({ query }) => `test: ${query.q}`)
-      .get("/episode", ({ query }) => `test: ${query.q}`)
-      .get("/review", ({ query }) => `test: ${query.q}`)
-      .get("/award", ({ query }) => `test: ${query.q}`)
+
+      .get("/movie", async ({ query, db }) => {
+        return db.movie.findMany({
+          where: {
+            title: {
+              contains: query.q,
+            },
+          },
+        });
+      })
+      .get("/tv", async ({ query, db }) => {
+        return db.movie.findMany({
+          where: {
+            title: {
+              contains: query.q,
+            },
+            type: "series",
+          },
+        });
+      })
+      .get("/person", async ({ query, db }) => {
+        return db.person.findMany({
+          where: {
+            name: {
+              contains: query.q,
+            },
+          },
+        });
+      })
+      .get("/episode", async ({ query, db }) => {
+        return db.episode.findMany({
+          where: {
+            title: {
+              contains: query.q,
+            },
+          },
+        });
+      })
+      .get("/review", async ({ query, db }) => {
+        return db.review.findMany({
+          where: {
+            comment: {
+              contains: query.q,
+            },
+          },
+        });
+      })
+      .get("/award", async ({ query, db }) => {
+        return db.award.findMany({
+          where: {
+            name: {
+              contains: query.q,
+            },
+          },
+        });
+      })
 );
 
 export default search;
