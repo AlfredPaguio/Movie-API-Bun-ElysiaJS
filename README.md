@@ -30,6 +30,11 @@ Run migration and seed scripts:
 ```bash
 bunx prisma migrate dev
 ```
+and
+
+```bash
+bunx prisma db seed
+```
 
 ### Development Server
 
